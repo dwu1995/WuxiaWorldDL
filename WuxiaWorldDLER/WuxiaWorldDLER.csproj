@@ -47,10 +47,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CatalogLoader.cs" />
     <Compile Include="ChapterLoader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ChapterXHTMLCreator.cs" />
+    <Compile Include="Series.cs" />
+    <Compile Include="SeriesLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

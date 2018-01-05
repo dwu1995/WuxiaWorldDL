@@ -11,11 +11,11 @@ namespace WuxiaWorldDLER
     public class ChapterLoader
     {
 
-        private static string baseUrl = "http://www.wuxiaworld.com/tdg-index/tdg-chapter-{0}/";
-        private int chapter;
-        public ChapterLoader(int chapter)
+        private String url;
+
+        public ChapterLoader(String url)
         {
-            this.chapter = chapter;
+            this.url = url;
         }
 
         public string GetChapterBody()
@@ -34,7 +34,6 @@ namespace WuxiaWorldDLER
 
         private HtmlDocument GetChapterDocument()
         {
-            string url = string.Format(baseUrl, chapter);
             HtmlWeb web = new HtmlWeb();
             HtmlDocument chapterDocument = web.Load(url);
 
@@ -45,7 +44,7 @@ namespace WuxiaWorldDLER
         {
             HtmlNodeCollection hrs = node.SelectNodes("hr");
 
-            if (hrs.Count == 0)
+            if (hrs == null || hrs.Count == 0)
                 return;
 
             foreach (HtmlNode hr in hrs)
