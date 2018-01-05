@@ -20,12 +20,10 @@ namespace WuxiaWorldDLER
 
         public void SaveSeries()
         {
-            HtmlNodeCollection allChapters = GetAllChapters();
-
-            for(int i = 0; i < allChapters.Count; i++)
+            List<String> allChapters = GetAllChapters();
+            for (int i = 0; i < allChapters.Count; i++)
             {
-                HtmlNode chapterNode = allChapters[i];
-                String chapterUrl = chapterNode.GetAttributeValue("href", "");
+                String chapterUrl = allChapters[i];
                 ChapterLoader chapterLoader = new ChapterLoader(chapterUrl);
                 string body = chapterLoader.GetChapterBody();
 
@@ -43,12 +41,12 @@ namespace WuxiaWorldDLER
             htmlCreator.SaveChapter(path);
         }
 
-        private HtmlNodeCollection GetAllChapters()
+        private List<String> GetAllChapters()
         {
             HtmlWeb web = new HtmlWeb();
             HtmlDocument seriesDocument = web.Load(series.Url);
 
-            return seriesDocument.DocumentNode.SelectNodes("//div[@itemprop='articleBody']//a");
+            return seriesDocument.DocumentNode.SelectNodes("//div[@itemprop='articleBody']//a").Select(n => n.GetAttributeValue("href", "")).Distinct().ToList();
         }
     }
 }
